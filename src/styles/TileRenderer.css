@@ -1,0 +1,68 @@
+.project1 {
+    background-color: #212224;
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project1-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-left: 15rem;
+}
+
+.project1-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15rem;
+}
+
+.project1-left-inner {
+    justify-content: center;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tile-renderer {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.border-rectangle {
+    position: absolute;
+    top: -100px;
+    right: -90px;
+    width: 100%;
+    height: 100%;
+    background-size: 40px 40px;
+    background-image:
+        linear-gradient(to right, #212224 32px, transparent 1px),
+        linear-gradient(to bottom, #212224 32px, transparent 1px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.border-rectangle-background {
+    position: absolute;
+    top: -100px;
+    right: -90px;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    pointer-events: none;
+    z-index: 0;
+}
