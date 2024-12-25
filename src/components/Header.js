@@ -6,10 +6,11 @@ function Header() {
         <nav className="header">
             <div className="logo"></div>
             <ul className="nav-items">
-                <li><a href="#Home">Home</a></li>
-                <li><a href="#project1">Key Actions</a></li>
-                <li><a href="#project2">Lumina</a></li>
-                <li><a href="#project3">Harrisonburg Explorer</a></li>
+                <li><a href="#Home">About</a></li>
+                <li><a href="#lumina">Lumina</a></li>
+                <li><a href="#tile-renderer">Tile Renderer</a></li>
+                <li><a href="#key-actions">Key Actions</a></li>
+                <li><a href="#harrisonburg-explorer">Harrisonburg Explorer</a></li>
             </ul>
         </nav>
     );

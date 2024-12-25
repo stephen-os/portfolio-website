@@ -1,8 +1,90 @@
-.project4 {
-    background-color: #2a2b2e;
+.key-actions {
+    background-color: #1c1d1f;
+
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+.key-actions-middler {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.key-actions-left {
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.key-actions-right {
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.key-actions-desc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #2a2b2e;
+    padding: 1.5rem;
+}
+
+.key-actions-image-container {
+    position: relative;
+    display: inline-block;
+
+    display: flex;
+    justify-content: center;
+}
+
+.key-actions-img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.key-actions-border-rectangle {
+    position: absolute;
+    top: -21%;
+    right: -13%;
+    width: 100%;
+    height: 100%;
+    background-size: 20px 20px;
+    background-image:
+        linear-gradient(to right, #1c1d1f 16px, transparent 1px),
+        linear-gradient(to bottom, #1c1d1f 16px, transparent 1px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.key-actions-border-rectangle-background {
+    position: absolute;
+    top: -21%;
+    right: -13%;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    pointer-events: none;
+    z-index: 0;
 }

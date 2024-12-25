@@ -1,4 +1,11 @@
 body {
   margin: 0;
-  font-family: Roboto, sans-serif;
+  font-family: 'Modeseven-L3n5', sans-serif;
+}
+
+@font-face {
+  font-family: 'Modeseven-L3n5';
+  src: url('../fonts/Modeseven-L3n5.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

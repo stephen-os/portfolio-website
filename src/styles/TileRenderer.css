@@ -1,66 +1,88 @@
-.project1 {
+.tile-renderer {
     background-color: #212224;
 
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
 }
 
-.project1-left {
+.tile-renderer-middler {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.tile-renderer-left {
+    height: 100vh;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    padding-left: 15rem;
 }
 
-.project1-right {
+.tile-renderer-right {
+    height: 100vh;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 15rem;
 }
 
-.project1-left-inner {
+.tile-renderer-desc {
+    width: 100%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #2a2b2e;
+    padding: 1.5rem;
 }
 
-.image-container {
+.tile-renderer-image-container {
     position: relative;
     display: inline-block;
+
+    display: flex;
+    justify-content: center;
 }
 
-.tile-renderer {
-    width: 100%;
+.tile-renderer-img {
+    width: 80%;
     height: auto;
     border-radius: 15px;
     position: relative;
     z-index: 2;
 }
 
-.border-rectangle {
+.tile-renderer-border-rectangle {
     position: absolute;
-    top: -100px;
-    right: -90px;
-    width: 100%;
+    top: -12%;
+    right: 20%;
+    width: 80%;
     height: 100%;
-    background-size: 40px 40px;
+    background-size: 20px 20px;
     background-image:
-        linear-gradient(to right, #212224 32px, transparent 1px),
-        linear-gradient(to bottom, #212224 32px, transparent 1px);
+        linear-gradient(to right, #212224 16px, transparent 1px),
+        linear-gradient(to bottom, #212224 16px, transparent 1px);
     pointer-events: none;
     z-index: 1;
 }
 
-.border-rectangle-background {
+.tile-renderer-border-rectangle-background {
     position: absolute;
-    top: -100px;
-    right: -90px;
-    width: 100%;
+    top: -12%;
+    right: 20%;
+    width: 80%;
     height: 100%;
     background-color: orange;
     pointer-events: none;

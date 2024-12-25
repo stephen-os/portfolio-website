@@ -3,9 +3,8 @@ import '../styles/App.css';
 import Header from './Header';
 import Footer from './Footer';
 
-import Home from './Home';
+import About from './About';
 import TileRenderer from './TileRenderer';
-import TileRendererCont from './TileRendererCont';
 import Lumina from './Lumina';
 import HarrisonburgExplorer from './HarrisonburgExplorer';
 import KeyActions from './KeyActions';
@@ -17,12 +16,11 @@ function App() {
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
       </head>
-      <Home />
-      <TileRenderer />
-      <TileRendererCont />
+      <About />
       <Lumina />
-      <HarrisonburgExplorer />
+      <TileRenderer />
       <KeyActions />
+      <HarrisonburgExplorer />
       <Footer />
     </>
   );
