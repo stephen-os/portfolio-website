@@ -1,15 +1,21 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.6a95b18a.css",
-    "main.js": "/Portfolio/static/js/main.2c0235f3.js",
+    "main.css": "/Portfolio/static/css/main.b0c95298.css",
+    "main.js": "/Portfolio/static/js/main.8650bcc4.js",
     "static/js/453.1407b060.chunk.js": "/Portfolio/static/js/453.1407b060.chunk.js",
+    "static/media/Desert.png": "/Portfolio/static/media/Desert.6a23d3d40588895b02c1.png",
+    "static/media/HarrisonburgExplorerImage.png": "/Portfolio/static/media/HarrisonburgExplorerImage.9b0f04035e695993bcf9.png",
+    "static/media/TileRenderer.png": "/Portfolio/static/media/TileRenderer.74be21d79ebe8fa58c70.png",
+    "static/media/Selfy.jpg": "/Portfolio/static/media/Selfy.dd69d8407968aae0d858.jpg",
+    "static/media/Modeseven-L3n5.ttf": "/Portfolio/static/media/Modeseven-L3n5.8cd71d7c10417596d6d8.ttf",
+    "static/media/KeyActions.png": "/Portfolio/static/media/KeyActions.0f8e9673147ab247f28f.png",
     "index.html": "/Portfolio/index.html",
-    "main.6a95b18a.css.map": "/Portfolio/static/css/main.6a95b18a.css.map",
-    "main.2c0235f3.js.map": "/Portfolio/static/js/main.2c0235f3.js.map",
+    "main.b0c95298.css.map": "/Portfolio/static/css/main.b0c95298.css.map",
+    "main.8650bcc4.js.map": "/Portfolio/static/js/main.8650bcc4.js.map",
     "453.1407b060.chunk.js.map": "/Portfolio/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6a95b18a.css",
-    "static/js/main.2c0235f3.js"
+    "static/css/main.b0c95298.css",
+    "static/js/main.8650bcc4.js"
   ]
 }
