@@ -10,6 +10,7 @@ function Header() {
                 <li><a href="#tiles">Tiles</a></li>
                 <li><a href="#key-actions">Key Actions</a></li>
                 <li><a href="#harrisonburg-explorer">Harrisonburg Explorer</a></li>
+                <li><a href="#resume-section">Resume</a></li>
             </ul>
         </nav>
     );
