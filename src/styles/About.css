@@ -1,8 +1,12 @@
+h1 {
+    text-align: center;
+}
+
 .about {
     background-color: #212224;
     color: white;
 
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,4 +92,45 @@
     background-color: orange;
     pointer-events: none;
     z-index: 0;
+}
+
+@media (min-width: 768px) {
+    .about {
+        flex-direction: row;
+    }
+
+    .about-left,
+    .about-right {
+        flex: 1;
+    }
+
+    .about-middler {
+        display: block;
+        width: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .about {
+        flex-direction: column;
+    }
+
+    .about-middler {
+        height: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .about-left,
+    .about-right {
+        height: auto;
+        flex: 1 1 auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .about-border-rectangle,
+    .about-border-rectangle-background {
+        display: none;
+    }
 }

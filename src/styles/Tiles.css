@@ -2,7 +2,7 @@
     background-color: #1c1d1f;
     color: white;
 
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +47,7 @@
     border-radius: 15px;
     background-color: #2a2b2e;
     padding: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
 }
 
@@ -90,4 +90,53 @@
     background-color: orange;
     pointer-events: none;
     z-index: 0;
+}
+
+@media (max-width: 1024px) {
+    .tiles-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .tiles {
+        flex-direction: row;
+        font-size: 0.6rem;
+    }
+
+    .tiles-left,
+    .tiles-right {
+        flex: 1;
+    }
+
+    .tiles-middler {
+        display: block;
+        width: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .tiles {
+        flex-direction: column;
+        font-size: 0.9rem;
+    }
+
+    .tiles-middler {
+        height: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .tiles-left,
+    .tiles-right {
+        height: auto;
+        flex: 1 1 auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .tiles-border-rectangle,
+    .tiles-border-rectangle-background {
+        display: none;
+    }
 }

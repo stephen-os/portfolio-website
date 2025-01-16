@@ -2,7 +2,7 @@
     background-color: #1c1d1f;
     color: white;
 
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +47,7 @@
     border-radius: 15px;
     background-color: #2a2b2e;
     padding: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
 }
 
@@ -90,4 +90,52 @@
     background-color: orange;
     pointer-events: none;
     z-index: 0;
+}
+
+@media (max-width: 1024px) {
+    .key-actions-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .key-actions {
+        flex-direction: row;
+        font-size: 0.6rem;
+    }
+
+    .key-actions-left,
+    .key-actions-right {
+        flex: 1;
+    }
+
+    .key-actions-middler {
+        display: block;
+        width: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .key-actions {
+        flex-direction: column;
+    }
+
+    .key-actions-middler {
+        height: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .key-actions-left,
+    .key-actions-right {
+        height: auto;
+        flex: 1 1 auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .key-actions-border-rectangle,
+    .key-actions-border-rectangle-background {
+        display: none;
+    }
 }

@@ -2,7 +2,7 @@
     background-color: #212224;
     color: white;
 
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +47,7 @@
     border-radius: 15px;
     background-color: #2a2b2e;
     padding: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
 }
 
@@ -90,4 +90,52 @@
     background-color: orange;
     pointer-events: none;
     z-index: 0;
+}
+
+@media (min-width: 768px) {
+    .harrisonburg-explorer {
+        flex-direction: row;
+    }
+
+    .harrisonburg-explorer-left,
+    .harrisonburg-explorer-right {
+        flex: 1;
+    }
+
+    .harrisonburg-explorer-middler {
+        display: block;
+        width: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .harrisonburg-explorer-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .harrisonburg-explorer {
+        flex-direction: column;
+    }
+
+    .harrisonburg-explorer-middler {
+        height: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        font-size: 0.6rem;
+    }
+
+    .harrisonburg-explorer-left,
+    .harrisonburg-explorer-right {
+        height: auto;
+        flex: 1 1 auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .harrisonburg-explorer-border-rectangle,
+    .harrisonburg-explorer-border-rectangle-background {
+        display: none;
+    }
 }

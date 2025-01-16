@@ -42,3 +42,24 @@
     color: orange;
     padding: 6px 10px;
 }
+
+@media (max-width: 767px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .nav-items {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    .nav-items li {
+        margin: 0.5rem 0;
+    }
+}

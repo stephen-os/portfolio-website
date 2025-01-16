@@ -2,7 +2,7 @@
     background-color: #212224;
     color: white;
 
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,17 +36,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.tiles-cont-desc {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 15px;
-    background-color: #2a2b2e;
-    padding: 1.5rem;
 }
 
 .tiles-cont-image-container {
@@ -88,4 +77,52 @@
     background-color: orange;
     pointer-events: none;
     z-index: 0;
+}
+
+@media (max-width: 1024px) {
+    .tiles-cont-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .tiles-cont {
+        flex-direction: row;
+        font-size: 0.6rem;
+    }
+
+    .tiles-cont-left,
+    .tiles-cont-right {
+        flex: 1;
+    }
+
+    .tiles-cont-middler {
+        display: block;
+        width: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .tiles-cont {
+        flex-direction: column;
+    }
+
+    .tiles-cont-middler {
+        height: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .tiles-cont-left,
+    .tiles-cont-right {
+        height: auto;
+        flex: 1 1 auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .tiles-cont-border-rectangle,
+    .tiles-cont-border-rectangle-background {
+        display: none;
+    }
 }
