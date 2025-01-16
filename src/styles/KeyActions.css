@@ -46,7 +46,9 @@
     flex-direction: column;
     border-radius: 15px;
     background-color: #2a2b2e;
-    padding: 1.5rem;
+    padding: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
 .key-actions-image-container {

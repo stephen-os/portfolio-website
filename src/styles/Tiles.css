@@ -1,5 +1,5 @@
-.tile-renderer {
-    background-color: #212224;
+.tiles {
+    background-color: #1c1d1f;
     color: white;
 
     height: 100vh;
@@ -13,7 +13,7 @@
     padding-left: 3rem;
 }
 
-.tile-renderer-middler {
+.tiles-middler {
     display: flex;
     justify-content: center;
     height: 100vh;
@@ -22,7 +22,7 @@
     padding-left: 1.5rem;
 }
 
-.tile-renderer-left {
+.tiles-left {
     height: 100vh;
     flex: 1;
     display: flex;
@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-.tile-renderer-right {
+.tiles-right {
     height: 100vh;
     flex: 1;
     display: flex;
@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-.tile-renderer-desc {
+.tiles-desc {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -46,10 +46,12 @@
     flex-direction: column;
     border-radius: 15px;
     background-color: #2a2b2e;
-    padding: 1.5rem;
+    padding: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
-.tile-renderer-image-container {
+.tiles-image-container {
     position: relative;
     display: inline-block;
 
@@ -57,7 +59,7 @@
     justify-content: center;
 }
 
-.tile-renderer-img {
+.tiles-img {
     width: 80%;
     height: auto;
     border-radius: 15px;
@@ -65,24 +67,24 @@
     z-index: 2;
 }
 
-.tile-renderer-border-rectangle {
+.tiles-border-rectangle {
     position: absolute;
-    top: -12%;
-    right: 20%;
+    top: -25%;
+    right: 1%;
     width: 80%;
     height: 100%;
     background-size: 20px 20px;
     background-image:
-        linear-gradient(to right, #212224 16px, transparent 1px),
-        linear-gradient(to bottom, #212224 16px, transparent 1px);
+        linear-gradient(to right, #1c1d1f 16px, transparent 1px),
+        linear-gradient(to bottom, #1c1d1f 16px, transparent 1px);
     pointer-events: none;
     z-index: 1;
 }
 
-.tile-renderer-border-rectangle-background {
+.tiles-border-rectangle-background {
     position: absolute;
-    top: -12%;
-    right: 20%;
+    top: -25%;
+    right: 1%;
     width: 80%;
     height: 100%;
     background-color: orange;

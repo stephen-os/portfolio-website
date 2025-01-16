@@ -4,8 +4,8 @@ import Header from './Header';
 import Footer from './Footer';
 
 import About from './About';
-import TileRenderer from './TileRenderer';
-import Lumina from './Lumina';
+import Tiles from './Tiles';
+import TilesCont from './TilesCont';
 import HarrisonburgExplorer from './HarrisonburgExplorer';
 import KeyActions from './KeyActions';
 
@@ -17,8 +17,8 @@ function App() {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
       </head>
       <About />
-      <Lumina />
-      <TileRenderer />
+      <Tiles />
+      <TilesCont />
       <KeyActions />
       <HarrisonburgExplorer />
       <Footer />
