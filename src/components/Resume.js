@@ -34,11 +34,16 @@ const Resume = () => {
                                 />
                             ))}
                     </Document>
-                    {numPages && (
-                        <p>
-                            Total Pages: {numPages}
-                        </p>
-                    )}
+                    {numPages && <p>Total Pages: {numPages}</p>}
+                </div>
+                <div className="resume-download-box">
+                    <a
+                        href={ResumePDF}
+                        download="StephenWatson_SoftwareEngineer_CV.pdf"
+                        className="resume-download-link"
+                    >
+                        Download My Resume
+                    </a>
                 </div>
             </div>
         </section>

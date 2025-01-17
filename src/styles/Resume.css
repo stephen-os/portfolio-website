@@ -31,10 +31,15 @@
     margin-bottom: 1rem;
 }
 
+.resume-download-box {
+    margin: 2rem;
+}
+
 .resume-download-link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
     font-weight: bold;
     padding: 0.8rem 1.2rem;
     border-radius: 8px;
@@ -45,4 +50,16 @@
 .resume-download-link:hover {
     background-color: #ff9f47;
     transform: translateY(-2px);
+}
+
+@media (max-width: 764px) {
+    .resume-box {
+        display: none;
+    }
+}
+
+@media (min-width: 765px) {
+    .resume-download-box {
+        display: none;
+    }
 }
