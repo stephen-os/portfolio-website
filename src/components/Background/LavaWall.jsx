@@ -12,6 +12,13 @@ class SeededRandom {
     }
 }
 
+const RenderPhase = {
+    NORMAL: 0,
+    RISING: 1,
+    ROTATING: 2,
+    LOWERING: 3
+};
+
 const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
@@ -65,7 +72,6 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         directionalLight2.position.set(-5, -5, 5);
         scene.add(directionalLight2);
 
-        // Grid settings
         const cubeSize = 1;
         const spacing = 1.1;
         const gridWidth = 30;
@@ -90,7 +96,7 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
 
                 const cube = new THREE.Mesh(cubeGeometry, material);
                 cube.position.set((x * spacing) - gridXOffset, (y * spacing) - gridYOffset, 0);
-                cube.userData = { state: "normal", targetZ: 0, rotationProgress: 0, rotationAxis: new THREE.Vector3(0, 0, 0) };
+                cube.userData = { state: "normal", rotationProgress: 0, rotationDirection: 1, rotationAxis: new THREE.Vector2(0, 0) };
                 scene.add(cube);
                 cubes.push(cube);
             }
@@ -114,19 +120,21 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
                 // If the cube is selected to animate and it's currently at rest
                 if (cube.userData.state === "normal" && Math.random() < 0.001) {
                     cube.userData.state = "rising";
-                    cube.userData.targetZ = 2;
 
                     const r = Math.random();
+                    const r2 = Math.random();
                     cube.userData.rotationAxis.x = r < 0.5 ? 1 : 0;
                     cube.userData.rotationAxis.y = r >= 0.5 ? 1 : 0;
+                    cube.userData.rotationDirection = r2 > 0.5 ? 1 : -1;
                     cube.userData.rotationProgress = 0;
                 }
 
                 // Handle animation states
                 if (cube.userData.state === "rising") {
-                    cube.position.z += (cube.userData.targetZ - cube.position.z) * 0.1;
-                    if (Math.abs(cube.position.z - cube.userData.targetZ) < 0.05) {
-                        cube.position.z = cube.userData.targetZ;
+                    const targetZ = 2;
+                    cube.position.z += (targetZ - cube.position.z) * 0.1;
+                    if (Math.abs(cube.position.z - targetZ) < 0.05) {
+                        cube.position.z = targetZ;
                         cube.userData.state = "rotating";
                     }
                 }
@@ -134,8 +142,8 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
                 if (cube.userData.state === "rotating") {
                     const rotationSpeed = 0.15;
 
-                    cube.rotation.x += cube.userData.rotationAxis.x * rotationSpeed;
-                    cube.rotation.y += cube.userData.rotationAxis.y * rotationSpeed;
+                    cube.rotation.x += cube.userData.rotationDirection * cube.userData.rotationAxis.x * rotationSpeed;
+                    cube.rotation.y += cube.userData.rotationDirection * cube.userData.rotationAxis.y * rotationSpeed;
 
                     cube.userData.rotationProgress += rotationSpeed
 
@@ -150,7 +158,7 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
                     cube.position.z += (0 - cube.position.z) * 0.1;
                     if (cube.position.z <= 0.05) {
                         cube.position.z = 0;
-                        cube.userData.state = "normal"; // Reset to idle
+                        cube.userData.state = "normal";
                     }
                 }
             });
