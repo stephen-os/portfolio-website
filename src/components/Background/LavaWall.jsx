@@ -17,31 +17,6 @@ const State = {
     LOWERING: 3
 };
 
-// Materials
-const createMaterials = () => {
-    return {
-        basalt: new THREE.MeshStandardMaterial({
-            color: 0x333333,
-            roughness: 0.7,
-            metalness: 0.2
-        }),
-        lavaEmissive: new THREE.MeshStandardMaterial({
-            color: 0xff5500,
-            emissive: 0xff3300,
-            emissiveIntensity: 0.8,
-            roughness: 0.4,
-            metalness: 0.1
-        }),
-        brightLava: new THREE.MeshStandardMaterial({
-            color: 0xff8800,
-            emissive: 0xff6600,
-            emissiveIntensity: 0.5,
-            roughness: 0.5,
-            metalness: 0.3
-        })
-    };
-};
-
 // Utility class for deterministic randomization
 class SeededRandom {
     constructor(seed) {
@@ -59,8 +34,13 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
     const cameraRef = useRef(null);
-    const cubesRef = useRef([]);
+    const cubeDataRef = useRef([]);
     const mouseRef = useRef(new THREE.Vector2());
+    const lastFrameTimeRef = useRef(0);
+    const instancedMeshesRef = useRef({});
+    const frameInterval = 1000 / 30; // Target 30 FPS
+    const matrixRef = useRef(new THREE.Matrix4());
+    const quaternionRef = useRef(new THREE.Quaternion());
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -69,11 +49,11 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         const { scene, camera, renderer, cleanupFn } = setupScene();
         const rng = new SeededRandom(seed);
 
-        // Create cubes
-        createCubes(scene, rng);
+        // Create instancedMeshes and cube data
+        createInstancedCubes(scene, rng);
 
         // Start animation
-        animate();
+        requestAnimationFrame(animate);
 
         return cleanupFn;
     }, [seed]);
@@ -87,21 +67,26 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         scene.background = new THREE.Color(0x000000);
         sceneRef.current = scene;
 
-        // Setup camera
+        // Setup camera with frustum culling enabled
         const camera = new THREE.PerspectiveCamera(
             75,
             containerWidth / containerHeight,
             0.1,
             1000
         );
-        camera.position.z = 10;
+        camera.position.set(0, 0, 8);
+        camera.lookAt(0, 0, 0);
         camera.frustumCulled = true;
         cameraRef.current = camera;
 
-        // Setup renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        // Setup optimized renderer
+        const renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            powerPreference: 'high-performance'
+        });
         renderer.setSize(containerWidth, containerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.precision = 'mediump'; // Use medium precision for better performance
 
         // Clear container and append renderer
         while (mountRef.current.firstChild) {
@@ -124,7 +109,7 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         const cleanupFn = () => {
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', handleResize);
-            rendererRef.current.setAnimationLoop(null);
+            renderer.setAnimationLoop(null);
 
             if (mountRef.current?.firstChild) {
                 mountRef.current.removeChild(mountRef.current.firstChild);
@@ -147,6 +132,25 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.5);
         directionalLight2.position.set(-5, -5, 5);
         scene.add(directionalLight2);
+    };
+
+    // Create optimized materials
+    const createMaterials = () => {
+        return {
+            basalt: new THREE.MeshLambertMaterial({
+                color: 0x333333
+            }),
+            lavaEmissive: new THREE.MeshLambertMaterial({
+                color: 0xff5500,
+                emissive: 0xff3300,
+                emissiveIntensity: 0.8
+            }),
+            brightLava: new THREE.MeshLambertMaterial({
+                color: 0xff8800,
+                emissive: 0xff6600,
+                emissiveIntensity: 0.5
+            })
+        };
     };
 
     const createMouseMoveHandler = (containerWidth, containerHeight) => {
@@ -175,84 +179,207 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         };
     };
 
-    const createCubes = (scene, rng) => {
+    const createInstancedCubes = (scene, rng) => {
         const materials = createMaterials();
         const cubeGeometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);
-        const cubes = [];
-        cubesRef.current = cubes;
+        const instanceCount = GRID_WIDTH * GRID_HEIGHT;
+
+        // Create counts for each material type
+        const basaltCount = Math.ceil(instanceCount * 0.6) + 7; // +7 to account distribution greater that 0.6
+        const brightLavaCount = Math.ceil(instanceCount * 0.25);
+        const lavaEmissiveCount = Math.ceil(instanceCount * 0.15);
+
+        // Create one instanced mesh per material type
+        const basaltInstances = new THREE.InstancedMesh(
+            cubeGeometry,
+            materials.basalt,
+            basaltCount
+        );
+        basaltInstances.count = 0;
+
+        const brightLavaInstances = new THREE.InstancedMesh(
+            cubeGeometry,
+            materials.brightLava,
+            brightLavaCount
+        );
+        brightLavaInstances.count = 0;
+
+        const lavaEmissiveInstances = new THREE.InstancedMesh(
+            cubeGeometry,
+            materials.lavaEmissive,
+            lavaEmissiveCount
+        );
+        lavaEmissiveInstances.count = 0;
+
+        instancedMeshesRef.current = {
+            basalt: basaltInstances,
+            brightLava: brightLavaInstances,
+            lavaEmissive: lavaEmissiveInstances
+        };
+
+        scene.add(basaltInstances);
+        scene.add(brightLavaInstances);
+        scene.add(lavaEmissiveInstances);
+
+        const matrix = matrixRef.current;
+        const cubeData = [];
 
         for (let x = 0; x < GRID_WIDTH; x++) {
             for (let y = 0; y < GRID_HEIGHT; y++) {
                 const random = rng.random();
-                let material = random < 0.6
-                    ? materials.basalt
-                    : random < 0.85
-                        ? materials.brightLava
-                        : materials.lavaEmissive;
-
-                const cube = new THREE.Mesh(cubeGeometry, material);
-                cube.position.set(
+                const position = new THREE.Vector3(
                     (x * SPACING) - GRID_X_OFFSET,
                     (y * SPACING) - GRID_Y_OFFSET,
                     0
                 );
 
-                // Initial state
-                cube.state = State.NORMAL;
-                cube.rotationProgress = 0;
-                cube.rotationDirection = 1;
-                cube.rotationAxis = new THREE.Vector2(0, 0);
+                // Determine material type
+                let materialType, instanceMesh, instanceIndex;
+                if (random < 0.6) {
+                    materialType = 'basalt';
+                    instanceMesh = basaltInstances;
+                    instanceIndex = basaltInstances.count++;
+                } else if (random < 0.85) {
+                    materialType = 'brightLava';
+                    instanceMesh = brightLavaInstances;
+                    instanceIndex = brightLavaInstances.count++;
+                } else {
+                    materialType = 'lavaEmissive';
+                    instanceMesh = lavaEmissiveInstances;
+                    instanceIndex = lavaEmissiveInstances.count++;
+                }
 
-                scene.add(cube);
-                cubes.push(cube);
+                // Set initial position
+                matrix.makeTranslation(position.x, position.y, position.z);
+                instanceMesh.setMatrixAt(instanceIndex, matrix);
+
+                // Store animation data
+                cubeData.push({
+                    materialType,
+                    instanceIndex,
+                    position: position.clone(),
+                    rotation: new THREE.Vector3(0, 0, 0),
+                    state: State.NORMAL,
+                    rotationProgress: 0,
+                    rotationDirection: 1,
+                    rotationAxis: new THREE.Vector2(0, 0),
+                });
             }
         }
+
+        // Update matrices
+        basaltInstances.instanceMatrix.needsUpdate = true;
+        brightLavaInstances.instanceMatrix.needsUpdate = true;
+        lavaEmissiveInstances.instanceMatrix.needsUpdate = true;
+
+        // Store cube data
+        cubeDataRef.current = cubeData;
     };
 
-    const animate = () => {
-        const camera = cameraRef.current;
-        const cubes = cubesRef.current;
+    const animate = (timestamp) => {
+        const elapsed = timestamp - lastFrameTimeRef.current;
 
-        cubes.forEach(updateCube);
+        if (elapsed >= frameInterval) {
+            lastFrameTimeRef.current = timestamp - (elapsed % frameInterval);
 
-        // Limit to 30 FPS
-        setTimeout(() => {
-            requestAnimationFrame(animate);
-        }, 1000 / 30);
+            // Update animation state
+            updateCubes();
 
-        rendererRef.current.render(sceneRef.current, camera);
+            // Render scene
+            rendererRef.current.render(sceneRef.current, cameraRef.current);
+        }
+
+        requestAnimationFrame(animate);
     };
 
-    const updateCube = (cube) => {
-        // Random chance to start rising
-        if (cube.state === State.NORMAL && Math.random() < 0.001) {
-            startCubeRising(cube);
-        }
+    const updateCubes = () => {
+        const cubes = cubeDataRef.current;
+        const meshes = instancedMeshesRef.current;
+        const matrix = matrixRef.current;
+        const quaternion = quaternionRef.current;
+        let needsUpdateBasalt = false;
+        let needsUpdateBrightLava = false;
+        let needsUpdateLavaEmissive = false;
 
-        // Handle rising animation
-        if (cube.state === State.RISING) {
-            const targetZ = 2;
-            cube.position.z += (targetZ - cube.position.z) * 0.1;
-
-            if (Math.abs(cube.position.z - targetZ) < 0.05) {
-                cube.position.z = targetZ;
-                cube.state = State.ROTATING;
+        cubes.forEach((cube) => {
+            // Existing state machine logic
+            if (cube.state === State.NORMAL && Math.random() < 0.001) {
+                startCubeRising(cube);
             }
-        }
 
-        // Handle rotation animation
-        if (cube.state === State.ROTATING) {
-            rotateCube(cube);
-        }
+            if (cube.state === State.RISING) {
+                const targetZ = 2;
+                cube.position.z += (targetZ - cube.position.z) * 0.1;
 
-        // Handle lowering animation
-        if (cube.state === State.LOWERING) {
-            cube.position.z += (0 - cube.position.z) * 0.1;
-
-            if (cube.position.z <= 0.05) {
-                cube.position.z = 0;
-                cube.state = State.NORMAL;
+                if (Math.abs(cube.position.z - targetZ) < 0.05) {
+                    cube.position.z = targetZ;
+                    cube.state = State.ROTATING;
+                }
             }
+
+            if (cube.state === State.ROTATING) {
+                const rotationSpeed = 0.15;
+
+                cube.rotation.x += cube.rotationDirection * cube.rotationAxis.x * rotationSpeed;
+                cube.rotation.y += cube.rotationDirection * cube.rotationAxis.y * rotationSpeed;
+                cube.rotationProgress += rotationSpeed;
+
+                if (cube.rotationProgress > Math.PI) {
+                    cube.state = State.LOWERING;
+                    cube.rotationProgress = 0;
+                    cube.rotation.set(0, 0, 0);
+                }
+            }
+
+            if (cube.state === State.LOWERING) {
+                cube.position.z += (0 - cube.position.z) * 0.1;
+
+                if (cube.position.z <= 0.05) {
+                    cube.position.z = 0;
+                    cube.state = State.NORMAL;
+                }
+            }
+
+            // Update instance matrix
+            quaternion.setFromEuler(new THREE.Euler(
+                cube.rotation.x,
+                cube.rotation.y,
+                cube.rotation.z
+            ));
+
+            matrix.compose(
+                cube.position,
+                quaternion,
+                new THREE.Vector3(1, 1, 1)
+            );
+
+            // Update the appropriate instanced mesh
+            const instanceMesh = meshes[cube.materialType];
+            instanceMesh.setMatrixAt(cube.instanceIndex, matrix);
+
+            // Mark for update
+            switch (cube.materialType) {
+                case 'basalt':
+                    needsUpdateBasalt = true;
+                    break;
+                case 'brightLava':
+                    needsUpdateBrightLava = true;
+                    break;
+                case 'lavaEmissive':
+                    needsUpdateLavaEmissive = true;
+                    break;
+            }
+        });
+
+        // Only update matrices that changed
+        if (needsUpdateBasalt) {
+            meshes.basalt.instanceMatrix.needsUpdate = true;
+        }
+        if (needsUpdateBrightLava) {
+            meshes.brightLava.instanceMatrix.needsUpdate = true;
+        }
+        if (needsUpdateLavaEmissive) {
+            meshes.lavaEmissive.instanceMatrix.needsUpdate = true;
         }
     };
 
@@ -268,26 +395,12 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
         cube.rotationProgress = 0;
     };
 
-    const rotateCube = (cube) => {
-        const rotationSpeed = 0.15;
-
-        cube.rotation.x += cube.rotationDirection * cube.rotationAxis.x * rotationSpeed;
-        cube.rotation.y += cube.rotationDirection * cube.rotationAxis.y * rotationSpeed;
-        cube.rotationProgress += rotationSpeed;
-
-        if (cube.rotationProgress > Math.PI) {
-            cube.state = State.LOWERING;
-            cube.rotationProgress = 0;
-            cube.rotation.set(0, 0, 0);
-        }
-    };
-
     const disposeResources = () => {
-        sceneRef.current?.traverse(object => {
-            if (object instanceof THREE.Mesh) {
-                object.geometry.dispose();
-                object.material.dispose();
-            }
+        // Dispose instanced meshes
+        const meshes = instancedMeshesRef.current;
+        Object.values(meshes).forEach(mesh => {
+            mesh.geometry.dispose();
+            mesh.material.dispose();
         });
 
         rendererRef.current?.dispose();
