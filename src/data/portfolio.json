@@ -1,0 +1,86 @@
+{
+    "projects": [
+        {
+            "image": "/cards/tiles_card.png",
+            "title": "Tiles",
+            "description": "A 2d Tilemap editor.",
+            "url": "https://github.com/Resetss/Tiles.git"
+        },
+        {
+            "image": "/cards/blank_card.png",
+            "title": "Comming soon.",
+            "description": "Coming soon.",
+            "url": ""
+        },
+        {
+            "image": "/cards/blank_card.png",
+            "title": "Comming soon.",
+            "description": "Comming soon.",
+            "url": ""
+        }
+    ],
+    "about": {
+        "languages": [
+            {
+                "name": "C/C++",
+                "level": 4
+            },
+            {
+                "name": "Java",
+                "level": 5
+            },
+            {
+                "name": "Python",
+                "level": 2
+            },
+            {
+                "name": "HTML",
+                "level": 2
+            },
+            {
+                "name": "CSS",
+                "level": 2
+            },
+            {
+                "name": "JS",
+                "level": 2
+            }
+        ],
+        "frameworks": [
+            {
+                "name": "React",
+                "level": 1
+            },
+            {
+                "name": "OpenGL",
+                "level": 2
+            },
+            {
+                "name": "Spring",
+                "level": 1
+            },
+            {
+                "name": "PyTorch",
+                "level": 1
+            }
+        ],
+        "tools": [
+            {
+                "name": "Git",
+                "level": 4
+            },
+            {
+                "name": "Docker",
+                "level": 1
+            },
+            {
+                "name": "VS Code",
+                "level": 4
+            },
+            {
+                "name": "Premake",
+                "level": 2
+            }
+        ]
+    }
+}

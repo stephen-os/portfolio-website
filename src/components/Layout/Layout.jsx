@@ -1,5 +1,5 @@
 import NavBar from '../NavBar/NavBar'
-import LavaWall from '../Background/LavaWall'
+import Background from '../Background/Background'
 import { Outlet } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -21,7 +21,7 @@ const Layout = () => {
             <NavBar />
             {/* Main content wrapper with left padding for desktop and top padding for mobile */}
             <div className={`${isMobile ? 'pt-10' : 'pl-10'} min-h-screen`}>
-                <LavaWall />
+                <Background />
                 <Outlet />
             </div>
         </div>

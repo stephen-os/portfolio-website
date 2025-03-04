@@ -29,7 +29,7 @@ class SeededRandom {
     }
 }
 
-const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
+const Background = ({ seed = 12345, height = "100vh", width = "100%" }) => {
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
@@ -411,4 +411,4 @@ const LavaWall = ({ seed = 12345, height = "100vh", width = "100%" }) => {
     );
 };
 
-export default LavaWall;
+export default Background;

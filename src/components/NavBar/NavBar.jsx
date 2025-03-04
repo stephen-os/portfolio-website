@@ -2,8 +2,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaHome, FaUser, FaBriefcase, FaFolderOpen, FaEnvelope, FaLinkedin, FaGithub, FaBars, FaTimes } from "react-icons/fa";
 
-import Logo from "../../assets/images/profile_pic.jpg";
-
 const NavBar = () => {
     const [showNav, setShowNav] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -39,9 +37,9 @@ const NavBar = () => {
         <div className={`navbar-container ${isMobile ? 'mobile-view' : ''}`}>
             {isMobile ? (
                 // Mobile header bar
-                <div className="fixed top-0 left-0 w-full bg-gray-100 flex justify-between items-center px-2 h-10 z-30 shadow-md">
+                <div className="fixed top-0 left-0 w-full bg-neutral-900 flex justify-between items-center px-2 h-10 z-30 shadow-md">
                     <Link to="/" className="flex items-center" onClick={() => setShowNav(false)}>
-                        <img src={Logo} alt="logo" className="w-6 rounded-full" />
+                        <img src="profile_pic.jpg" alt="logo" className="w-6 rounded-full" />
                     </Link>
 
                     <button
@@ -54,7 +52,7 @@ const NavBar = () => {
 
                     {/* Mobile navigation overlay */}
                     {showNav && (
-                        <div className="fixed inset-0 top-10 bg-gray-100 z-20 flex flex-col items-center pt-8">
+                        <div className="fixed inset-0 top-9 bg-neutral-900 z-20 flex flex-col items-center pt-8">
                             <nav className="flex flex-col items-center space-y-6 mb-8">
                                 <NavLink
                                     to="/"
@@ -100,12 +98,12 @@ const NavBar = () => {
 
                             <ul className="flex space-x-6">
                                 <li>
-                                    <a href="https://google.com" target="_blank" rel="noreferrer">
+                                    <a href="https://www.linkedin.com/in/resets" target="_blank" rel="noreferrer">
                                         <FaLinkedin className="text-gray-500 hover:text-orange-400" size={20} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://google.com" target="_blank" rel="noreferrer">
+                                    <a href="https://github.com/Resetss" target="_blank" rel="noreferrer">
                                         <FaGithub className="text-gray-500 hover:text-orange-400" size={20} />
                                     </a>
                                 </li>
@@ -115,12 +113,12 @@ const NavBar = () => {
                 </div>
             ) : (
                 // Desktop sidebar
-                <div className="bg-gray-100 w-10 h-full fixed top-0 z-30 flex flex-col items-center py-2">
+                <div className="bg-neutral-900 w-10 h-full fixed top-0 z-30 flex flex-col items-center py-2">
                     <Link className="flex flex-col items-center" to="/">
-                        <img src={Logo} alt="logo" className="w-6 mb-2 rounded-full" />
+                        <img src="profile_pic.jpg" alt="logo" className="w-6 mb-2 rounded-full" />
                     </Link>
 
-                    <nav className="flex flex-col items-center mt-26 space-y-6">
+                    <nav className="flex flex-col items-center mt-56 space-y-6">
                         <NavLink
                             to="/"
                             className={({ isActive }) => isActive ? 'text-orange-400' : 'text-gray-500 hover:text-orange-400'}
@@ -155,12 +153,12 @@ const NavBar = () => {
 
                     <ul className="absolute bottom-6 flex flex-col space-y-4">
                         <li>
-                            <a href="https://google.com" target="_blank" rel="noreferrer">
+                            <a href="https://www.linkedin.com/in/resets" target="_blank" rel="noreferrer">
                                 <FaLinkedin className="text-gray-500 hover:text-orange-400" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://google.com" target="_blank" rel="noreferrer">
+                            <a href="https://github.com/Resetss" target="_blank" rel="noreferrer">
                                 <FaGithub className="text-gray-500 hover:text-orange-400" />
                             </a>
                         </li>
