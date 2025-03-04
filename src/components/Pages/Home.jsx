@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -40,9 +41,11 @@ const Home = () => {
                     >
                         Software Engineer
                     </motion.p>
-                    <button className="mt-4 py-2 px-6 bg-orange-500 text-white rounded-md hover:bg-orange-600">
-                        Contact Me
-                    </button>
+                    <Link to="/contact">
+                        <button className="mt-4 py-2 px-6 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                            Contact Me
+                        </button>
+                    </Link>
                 </motion.div>
 
                 {/* Profile Image */}
