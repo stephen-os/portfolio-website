@@ -56,7 +56,7 @@ const Home = () => {
                     className="ml-6"
                 >
                     <img
-                        src="profile_pic.jpg"
+                        src="/PortfolioWebsite/profile_pic.jpg"
                         alt="Stephen Watson"
                         className="w-72 h-72 rounded-full object-cover border border-orange-500"
                     />
