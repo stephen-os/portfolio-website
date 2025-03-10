@@ -1,19 +1,19 @@
 {
     "projects": [
         {
-            "image": "/PortfolioWebsite/cards/tiles_card.png",
+            "image": "/portfolio-website/cards/tiles_card.png",
             "title": "Tiles",
             "description": "A 2d Tilemap editor.",
             "url": "https://github.com/Resetss/Tiles.git"
         },
         {
-            "image": "/PortfolioWebsite/cards/blank_card.png",
+            "image": "/portfolio-website/cards/blank_card.png",
             "title": "Comming soon.",
             "description": "Coming soon.",
             "url": ""
         },
         {
-            "image": "/PortfolioWebsite/cards/blank_card.png",
+            "image": "/portfolio-website/cards/blank_card.png",
             "title": "Comming soon.",
             "description": "Comming soon.",
             "url": ""
