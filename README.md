@@ -1,12 +1,12 @@
-# React + Vite
+# Portfolio Website  
+This is my personal website for showcasing my education, experience, and personal projects. It is also my first complete project using React Native with TypeScript and Tailwind CSS. Additionally, I incorporated my computer graphics knowledge by implementing an animated background rendered in real-time with Three.js.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Dependencies  
+- **React** – A JavaScript library for building user interfaces, providing a component-based architecture for dynamic and interactive web applications.  
+- **Tailwind CSS** – A utility-first CSS framework that simplifies styling with pre-defined classes, enabling rapid UI development.  
+- **Three.js** – A JavaScript library for rendering 3D graphics in the browser using WebGL, used to create the real-time animated background.  
+- **Framer Motion** – A powerful animation library for React, enabling smooth transitions and interactions.  
+- **Recharts** – A charting library for React that simplifies data visualization with customizable, responsive graphs.  
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Link To Website
+- **https://stephen-os.github.io/portfolio-website**
