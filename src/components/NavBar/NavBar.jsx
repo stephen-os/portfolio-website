@@ -39,7 +39,7 @@ const NavBar = () => {
                 // Mobile header bar
                 <div className="fixed top-0 left-0 w-full bg-neutral-900 flex justify-between items-center px-2 h-10 z-30 shadow-md">
                     <Link to="/" className="flex items-center" onClick={() => setShowNav(false)}>
-                        <img src="/PortfolioWebsite/profile_pic.jpg" alt="logo" className="w-6 rounded-full" />
+                        <img src="/portfolio-website/profile_pic.jpg" alt="logo" className="w-6 rounded-full" />
                     </Link>
 
                     <button
@@ -115,7 +115,7 @@ const NavBar = () => {
                 // Desktop sidebar
                 <div className="bg-neutral-900 w-10 h-full fixed top-0 z-30 flex flex-col items-center py-2">
                     <Link className="flex flex-col items-center" to="/">
-                        <img src="/PortfolioWebsite/profile_pic.jpg" alt="logo" className="w-6 mb-2 rounded-full" />
+                        <img src="/portfolio-website/profile_pic.jpg" alt="logo" className="w-6 mb-2 rounded-full" />
                     </Link>
 
                     <nav className="flex flex-col items-center mt-56 space-y-6">
